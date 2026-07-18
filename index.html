@@ -79,7 +79,6 @@
 </head>
 <body class="min-h-screen relative overflow-x-hidden py-10 px-4 flex flex-col items-center">
 
-    <!-- Floating Background Glitter Elements -->
     <div class="bg-sparkle top-10 left-10 text-gold-text text-xl"><i class="fa-solid fa-sparkles"></i></div>
     <div class="bg-sparkle top-1/4 right-10 text-gold-text text-3xl"><i class="fa-solid fa-star"></i></div>
     <div class="bg-sparkle bottom-1/3 left-5 text-gold-text text-2xl"><i class="fa-solid fa-heart"></i></div>
@@ -87,13 +86,9 @@
     <!-- Floating Audio/Music Controller -->
     <div class="fixed top-5 right-5 z-50">
         <button id="musicToggle" class="bg-white/90 border border-[#E6D7B8] px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#fcf9f0] transition-all text-sm font-semibold text-[#c5a059]">
-            <i id="musicIcon" class="fa-solid fa-cake-candles animate-bounce"></i>
+            <i id="musicIcon" class="fa-solid fa-music animate-bounce"></i>
             <span>Play Happy Birthday Music</span>
         </button>
-        <!-- Public Domain Classic Happy Birthday Song -->
-        <audio id="bgMusic" loop>
-            <source src="https://archive.org/download/HappyBirthdayToYou_201312/Happy%20Birthday%20To%20You.mp3" type="audio/mpeg">
-        </audio>
     </div>
 
     <!-- Main Outer Container -->
@@ -171,16 +166,28 @@
             <div class="relative bg-white border-8 border-white rounded-2xl shadow-xl overflow-hidden max-w-lg mx-auto">
                 <div class="aspect-[3/4] w-full bg-stone-100 flex items-center justify-center relative">
                     <!-- Real memories photos requested loaded with robust error fallbacks -->
-                    <img id="carouselImage" src="WhatsApp Image 2026-07-18 at 1.53.10 PM.jpeg" class="w-full h-full object-cover" alt="Our Special Memory" onerror="this.src='https://placehold.co/600x800/fcfbf7/d4af37?text=Our+Adventure'">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    <p id="carouselCaption" class="absolute bottom-4 left-4 right-4 text-white font-serif-love italic text-center md:text-lg">Scaling new heights together. Every moment by your side is an adventure.</p>
+                    <img id="carouselImage" src="" class="w-full h-full object-cover transition-all duration-300" alt="Our Special Memory" onerror="handleImageError(this)">
+                    
+                    <!-- Friendly Info Overlay if user hasn't uploaded their photos to GitHub yet -->
+                    <div id="imageUploadTip" class="hidden absolute inset-0 bg-stone-900/90 text-white flex flex-col items-center justify-center p-6 text-center space-y-3 z-20">
+                        <i class="fa-solid fa-cloud-arrow-up text-4xl text-amber-300"></i>
+                        <h4 class="font-bold text-sm">Let's Upload Your Photo!</h4>
+                        <p class="text-xs text-stone-300 leading-relaxed">
+                            To display your picture here, please upload the image file named: <br>
+                            <span class="font-mono bg-white/10 px-1 py-0.5 rounded text-yellow-300" id="tipFileName"></span> <br>
+                            directly into your main GitHub repository!
+                        </p>
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
+                    <p id="carouselCaption" class="absolute bottom-4 left-4 right-4 text-white font-serif-love italic text-center text-sm md:text-base z-10">Loading picture...</p>
                 </div>
 
                 <!-- Navigation arrows -->
-                <button onclick="prevPhoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md z-15">
+                <button onclick="prevPhoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md z-30">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
-                <button onclick="nextPhoto()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md z-15">
+                <button onclick="nextPhoto()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md z-30">
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
@@ -292,14 +299,16 @@
                 </div>
 
                 <!-- Gift Reveal Container -->
-                <div id="gift1-reveal" class="hidden p-4 bg-emerald-50 border border-emerald-100 rounded-xl space-y-3 text-center">
+                <div id="gift1-reveal" class="hidden p-4 bg-emerald-50 border border-emerald-100 rounded-xl space-y-3 text-center animate-fade-in">
                     <h5 class="font-serif-love text-emerald-800 font-bold">🎉 Correct! Your very own Karaoke Set! 🎤🎶</h5>
-                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd6a?auto=format&fit=crop&q=80&w=400" class="w-full max-h-40 object-cover rounded-lg shadow-md mx-auto" alt="Karaoke set style mic" onerror="this.src='https://placehold.co/400x200/e6f4ea/137333?text=Karaoke+Set'">
+                    <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-3xl text-emerald-600 my-4 shadow-sm">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                    </div>
                     <p class="text-xs text-stone-600">Get ready to belt out your favorite tunes with all your heart!</p>
                 </div>
             </div>
 
-            <!-- RIDDLE 2: LAPTOP BAG (Photo Removed) -->
+            <!-- RIDDLE 2: LAPTOP BAG (Sleek minimalist gold-green suitcase icon) -->
             <div class="bg-[#fcfbf7] border border-[#f0e8d3] p-6 rounded-2xl space-y-4">
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-8 rounded-full bg-[#fbf6e9] border border-[#d4af37]/40 flex items-center justify-center gold-text font-bold">2</span>
@@ -317,7 +326,7 @@
                     </div>
                 </div>
 
-                <!-- Gift Reveal Container (Updated: Laptop bag photo removed as requested, replaced with beautiful graphic setup) -->
+                <!-- Gift Reveal Container (Updated: Clean design with no laptop bag image) -->
                 <div id="gift2-reveal" class="hidden p-6 bg-emerald-50 border border-emerald-100 rounded-xl space-y-3 text-center">
                     <h5 class="font-serif-love text-emerald-800 font-bold">🎉 Correct! A Premium Laptop Bag! 💻💼</h5>
                     <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-3xl text-emerald-600 my-4 shadow-sm">
@@ -380,6 +389,21 @@
         ];
         let photoIdx = 0;
 
+        // Visual handling of images that are not yet uploaded by user to GitHub repository
+        function handleImageError(imageElement) {
+            const currentImgObj = photos[photoIdx];
+            const uploadTip = document.getElementById('imageUploadTip');
+            const tipFileName = document.getElementById('tipFileName');
+            
+            if (uploadTip && tipFileName) {
+                tipFileName.innerText = currentImgObj.url;
+                uploadTip.classList.remove('hidden');
+            }
+            
+            // Set beautiful golden textured backup placeholder
+            imageElement.src = `https://placehold.co/600x800/fbf6e9/d4af37?text=${encodeURIComponent(currentImgObj.caption)}`;
+        }
+
         // Custom modal setup since standard alert() is forbidden
         function displayToast(msg, isSuccess = false) {
             const container = document.createElement('div');
@@ -399,27 +423,94 @@
             }, 4000);
         }
 
-        // Music element configuration
-        const bgMusic = document.getElementById('bgMusic');
+        /* =========================================================================
+           POWERFUL WEB AUDIO SYNTHESIZER: Play "Happy Birthday" chimes natively!
+           ========================================================================= */
+        let audioCtx = null;
+        let isMusicPlaying = false;
+        let playbackInterval = null;
+        let melodyIndex = 0;
+
+        // Custom melody configuration [note, duration ratio]
+        // Frequency dictionary for C Major Scale
+        const notesFreq = {
+            'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23, 'G4': 392.00, 'A4': 440.00, 'Bb4': 466.16, 'C5': 523.25, 'D5': 587.33
+        };
+
+        const birthdayMelody = [
+            {note: 'C4', dur: 0.75}, {note: 'C4', dur: 0.25}, {note: 'D4', dur: 1.0}, {note: 'C4', dur: 1.0}, {note: 'F4', dur: 1.0}, {note: 'E4', dur: 2.0},
+            {note: 'C4', dur: 0.75}, {note: 'C4', dur: 0.25}, {note: 'D4', dur: 1.0}, {note: 'C4', dur: 1.0}, {note: 'G4', dur: 1.0}, {note: 'F4', dur: 2.0},
+            {note: 'C4', dur: 0.75}, {note: 'C4', dur: 0.25}, {note: 'C5', dur: 1.0}, {note: 'A4', dur: 1.0}, {note: 'F4', dur: 1.0}, {note: 'E4', dur: 1.0}, {note: 'D4', dur: 2.0},
+            {note: 'Bb4', dur: 0.75}, {note: 'Bb4', dur: 0.25}, {note: 'A4', dur: 1.0}, {note: 'F4', dur: 1.0}, {note: 'G4', dur: 1.0}, {note: 'F4', dur: 2.0}
+        ];
+
+        const beatDuration = 450; // Tempo speed (ms)
+
+        function playChime(freq, durationMs) {
+            if (!audioCtx) return;
+            
+            // Clean synth sound setup
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            // Premium Music Box Tone Profile (Triangle wave + sine wave harmonics)
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            
+            // Envelope generation
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.25, audioCtx.currentTime + 0.05); // attack
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + (durationMs / 1000) - 0.05); // decay
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + (durationMs / 1000));
+        }
+
+        function playNextNote() {
+            if (!isMusicPlaying) return;
+            
+            const currentObj = birthdayMelody[melodyIndex];
+            const frequency = notesFreq[currentObj.note];
+            const actualDuration = currentObj.dur * beatDuration;
+
+            playChime(frequency, actualDuration);
+
+            melodyIndex = (melodyIndex + 1) % birthdayMelody.length;
+            
+            // Schedule next play
+            playbackInterval = setTimeout(playNextNote, actualDuration + 50);
+        }
+
+        // Toggle action handler
         const musicToggle = document.getElementById('musicToggle');
         const musicIcon = document.getElementById('musicIcon');
-        let isMusicPlaying = false;
 
-        // Interactive Music Controls
         musicToggle.addEventListener('click', () => {
-            if (isMusicPlaying) {
-                bgMusic.pause();
-                musicIcon.className = "fa-solid fa-cake-candles animate-bounce";
-                musicToggle.querySelector('span').innerText = 'Play Happy Birthday Music 🎶';
-            } else {
-                bgMusic.play().then(() => {
-                    musicIcon.className = "fa-solid fa-compact-disc animate-spin text-red-500";
-                    musicToggle.querySelector('span').innerText = 'Playing Birthday Melody... 💖';
-                }).catch(err => {
-                    displayToast("Please interact with the screen first to play music!");
-                });
+            // Initializing context on user gesture
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
-            isMusicPlaying = !isMusicPlaying;
+
+            if (isMusicPlaying) {
+                isMusicPlaying = false;
+                clearTimeout(playbackInterval);
+                musicIcon.className = "fa-solid fa-music";
+                musicToggle.querySelector('span').innerText = 'Play Happy Birthday Music';
+            } else {
+                isMusicPlaying = true;
+                melodyIndex = 0;
+                musicIcon.className = "fa-solid fa-compact-disc animate-spin text-red-500";
+                musicToggle.querySelector('span').innerText = 'Playing Birthday Chimes... 💖';
+                
+                // Resume Audio Context if suspended
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                playNextNote();
+            }
         });
 
         // Step 1: Wedding anniversary validation
@@ -460,8 +551,18 @@
         function updatePhoto() {
             const imgEl = document.getElementById('carouselImage');
             const capEl = document.getElementById('carouselCaption');
-            if (imgEl) imgEl.src = photos[photoIdx].url;
-            if (capEl) capEl.innerText = photos[photoIdx].caption;
+            const uploadTip = document.getElementById('imageUploadTip');
+            
+            if (uploadTip) {
+                uploadTip.classList.add('hidden'); // Reset tip on index change
+            }
+
+            if (imgEl) {
+                imgEl.src = photos[photoIdx].url;
+            }
+            if (capEl) {
+                capEl.innerText = photos[photoIdx].caption;
+            }
         }
         function prevPhoto() {
             photoIdx = (photoIdx - 1 + photos.length) % photos.length;
