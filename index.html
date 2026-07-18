@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love 💝</title>
+    
+    <!-- Beautiful Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & Tailwind CSS for modern responsive styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Confetti Library for explosive celebration effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle, #fffdf9 0%, #f7f3e8 100%);
+            color: #3e3323;
+        }
+        .font-serif-love {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-cursive {
+            font-family: 'Great Vibes', cursive;
+        }
+        .gold-border {
+            border-color: #d4af37;
+        }
+        .gold-bg {
+            background-color: #d4af37;
+        }
+        .gold-text {
+            color: #c5a059;
+        }
+        
+        /* Flickering candle fire animation */
+        .candle-flame {
+            width: 12px;
+            height: 24px;
+            background: linear-gradient(to top, #ff9900, #ffcc00, #ffff99);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 1s ease-in-out infinite alternate;
+            box-shadow: 0 0 10px rgba(255,153,0,0.8);
+            filter: blur(0.5px);
+        }
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-1deg); opacity: 0.9; }
+            100% { transform: scale(1.1) rotate(1.5deg); opacity: 1; }
+        }
+
+        /* Wax seal hover bounce */
+        .wax-seal {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .wax-seal:hover {
+            transform: scale(1.15) rotate(5deg);
+            filter: drop-shadow(0 10px 15px rgba(212, 175, 55, 0.4));
+        }
+
+        /* Floating background elements */
+        .bg-sparkle {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.4;
+            animation: spinSlow 20s linear infinite;
+        }
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden py-10 px-4 flex flex-col items-center">
+
+    <!-- Floating Background Glitter Elements -->
+    <div class="bg-sparkle top-10 left-10 text-gold-text text-xl"><i class="fa-solid fa-sparkles"></i></div>
+    <div class="bg-sparkle top-1/4 right-10 text-gold-text text-3xl"><i class="fa-solid fa-star"></i></div>
+    <div class="bg-sparkle bottom-1/3 left-5 text-gold-text text-2xl"><i class="fa-solid fa-heart"></i></div>
+
+    <!-- Floating Audio/Music Controller -->
+    <div class="fixed top-5 right-5 z-50">
+        <button id="musicToggle" class="bg-white/90 border border-[#E6D7B8] px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#fcf9f0] transition-all text-sm font-semibold text-[#c5a059]">
+            <i id="musicIcon" class="fa-solid fa-music animate-bounce"></i>
+            <span>Play Happy Birthday Music</span>
+        </button>
+        <!-- Standard royalty free romantic acoustic happy birthday piano cover -->
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Main Outer Container -->
+    <div class="w-full max-w-2xl bg-[#fffdfa] border border-[#e8dfc7] shadow-xl rounded-3xl p-6 md:p-10 flex flex-col items-center relative z-10">
+        
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="font-cursive text-6xl md:text-7xl gold-text mb-2 animate-pulse">Happy Birthday My Love</h1>
+            <p class="font-serif-love italic text-lg text-stone-500">Every love story is beautiful, but ours is my favorite.</p>
+            <div class="w-24 h-[1px] gold-bg mx-auto mt-4"></div>
+        </div>
+
+        <!-- 🔒 STEP 1: WEDDING DATE ENTRY -->
+        <div id="step-1" class="w-full space-y-6">
+            <div class="bg-[#fcfbf7] border border-[#f0e8d3] p-6 rounded-2xl text-center space-y-4">
+                <div class="w-16 h-16 bg-[#fbf6e9] rounded-full flex items-center justify-center mx-auto text-2xl text-[#d4af37]">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="font-serif-love text-xl font-bold">1. Unlock Our Golden Date</h3>
+                <p class="text-sm text-stone-500 leading-relaxed">Enter our wedding anniversary date to begin your birthday journey.</p>
+                
+                <div class="max-w-xs mx-auto">
+                    <input type="date" id="anniversaryInput" class="w-full border border-[#d4af37]/40 bg-white px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#d4af37] text-center text-stone-700">
+                    <button onclick="checkAnniversary()" class="w-full mt-3 gold-bg text-white font-bold py-3 rounded-xl hover:bg-[#b08e27] shadow-md hover:shadow-lg transition-all">
+                        Unlock 💛
+                    </button>
+                    <p id="lockError" class="text-red-500 text-xs mt-2 hidden">Oops! Hmm... that's not quite right. Try our special day.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ✉️ STEPS 2 & 3: WAX SEAL ENVELOPE & LETTER -->
+        <div id="step-2" class="w-full space-y-6 hidden">
+            <div class="text-center">
+                <span class="text-xs font-semibold uppercase tracking-widest gold-text">Steps 2 & 3</span>
+                <h3 class="font-serif-love text-2xl font-bold mt-1">A Heartfelt Letter For You</h3>
+            </div>
+            
+            <div class="flex flex-col items-center py-6">
+                <!-- Clickable Envelope Wax Seal -->
+                <div id="envelope-sealed" class="text-center space-y-4">
+                    <div onclick="openEnvelope()" class="wax-seal w-32 h-32 bg-[#c92a2a] rounded-full border-4 border-double border-[#ffccd5] flex items-center justify-center mx-auto shadow-lg relative">
+                        <i class="fa-solid fa-heart text-white text-4xl animate-pulse"></i>
+                        <!-- Golden wax strings -->
+                        <span class="absolute text-white/40 text-[10px] font-bold font-serif-love uppercase tracking-wider">Tap To Open</span>
+                    </div>
+                    <p class="text-sm text-stone-500 italic">Click the wax seal to open my heart's message...</p>
+                </div>
+
+                <!-- Open Letter View -->
+                <div id="letter-open" class="hidden bg-[#fbf6e9] border border-[#e6d7b8] p-6 md:p-8 rounded-2xl shadow-inner w-full text-stone-700 leading-relaxed space-y-4 text-center font-serif-love">
+                    <p class="text-left"><strong>My dear,</strong></p>
+                    <p class="text-left italic">
+                        Some feelings are too special to put into words, but I tried. 
+                        This letter is a small reminder of how much you mean to me. 
+                        You make my life brighter, safer, and infinitely more beautiful every single day.
+                    </p>
+                    <p class="text-right">Forever and always,<br><span class="font-cursive text-3xl gold-text">Yours ❤️</span></p>
+                    
+                    <button onclick="goToStep4()" class="w-full max-w-xs mt-6 gold-bg text-white font-bold py-3 rounded-xl hover:bg-[#b08e27] shadow-md transition-all mx-auto block">
+                        Our Memories ✨
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📸 STEP 4: MEMORIES CAROUSEL -->
+        <div id="step-4" class="w-full space-y-6 hidden">
+            <div class="text-center">
+                <span class="text-xs font-semibold uppercase tracking-widest gold-text">Step 4</span>
+                <h3 class="font-serif-love text-2xl font-bold mt-1">Our Favorite Memories</h3>
+            </div>
+
+            <!-- Interactive Carousel Frame -->
+            <div class="relative bg-white border-8 border-white rounded-2xl shadow-xl overflow-hidden max-w-lg mx-auto">
+                <div class="aspect-[4/3] w-full bg-stone-100 flex items-center justify-center relative">
+                    <img id="carouselImage" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="Romantic couple portrait">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <p id="carouselCaption" class="absolute bottom-4 left-4 right-4 text-white font-serif-love italic text-center md:text-lg">One of my absolute favorite moments with you.</p>
+                </div>
+
+                <!-- Navigation arrows -->
+                <button onclick="prevPhoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="nextPhoto()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <p class="text-xs text-center text-stone-400">💡 Tip: You can swap these generic couples pictures for your real photos easily inside your index.html file!</p>
+
+            <button onclick="goToStep5()" class="w-full max-w-xs mt-6 gold-bg text-white font-bold py-3 rounded-xl hover:bg-[#b08e27] shadow-md transition-all mx-auto block">
+                5 Reasons I Love You 💖
+            </button>
+        </div>
+
+        <!-- 💖 STEP 5: 5 REASONS I LOVE YOU -->
+        <div id="step-5" class="w-full space-y-6 hidden">
+            <div class="text-center">
+                <span class="text-xs font-semibold uppercase tracking-widest gold-text">Step 5</span>
+                <h3 class="font-serif-love text-2xl font-bold mt-1">5 Reasons I Love You</h3>
+            </div>
+
+            <!-- Reasons list box -->
+            <div class="space-y-3 max-w-lg mx-auto">
+                <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">1</span>
+                    <p class="text-stone-700 font-medium text-sm md:text-base">You always got my back.</p>
+                </div>
+                <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">2</span>
+                    <p class="text-stone-700 font-medium text-sm md:text-base">You always keep your inner child alive.</p>
+                </div>
+                <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">3</span>
+                    <p class="text-stone-700 font-medium text-sm md:text-base">You also now love beaches (my absolute favorite!).</p>
+                </div>
+                <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">4</span>
+                    <p class="text-stone-700 font-medium text-sm md:text-base">You care for me no matter which phase we are in.</p>
+                </div>
+                <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">5</span>
+                    <p class="text-stone-700 font-medium text-sm md:text-base">You handle every tough situation so calmly.</p>
+                </div>
+            </div>
+
+            <button onclick="goToStep6()" class="w-full max-w-xs mt-6 gold-bg text-white font-bold py-3 rounded-xl hover:bg-[#b08e27] shadow-md transition-all mx-auto block">
+                Time to Celebrate! 🎂
+            </button>
+        </div>
+
+        <!-- 🎂 STEPS 6 & 7: CAKE & BLOW CANDLES -->
+        <div id="step-6" class="w-full space-y-6 hidden">
+            <div class="text-center">
+                <span class="text-xs font-semibold uppercase tracking-widest gold-text">Steps 6 & 7</span>
+                <h3 class="font-serif-love text-2xl font-bold mt-1">Blow Out The Candles!</h3>
+                <p class="text-sm text-stone-500 mt-2">Close your eyes, make a wish, and blow out the candles below...</p>
+            </div>
+
+            <!-- Beautiful Cake Layout -->
+            <div class="flex flex-col items-center space-y-6 relative py-4">
+                <div class="relative w-64 h-64 bg-[#fcfbf7] border border-[#f0e8d3] rounded-full shadow-inner flex flex-col items-center justify-center">
+                    
+                    <!-- Birthday Cake Image -->
+                    <img id="cakeImage" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=400" class="w-36 h-36 object-cover rounded-full border-4 border-white shadow-lg z-10" alt="Lit Birthday Cake">
+                    
+                    <!-- Custom Candle flames overlay -->
+                    <div id="candlesContainer" class="absolute -top-4 flex justify-center gap-6 z-20">
+                        <div class="flex flex-col items-center">
+                            <div class="candle-flame"></div>
+                            <div class="w-3 h-12 bg-rose-400 rounded-t-sm shadow-md"></div>
+                        </div>
+                        <div class="flex flex-col items-center -translate-y-2">
+                            <div class="candle-flame"></div>
+                            <div class="w-3 h-12 bg-sky-400 rounded-t-sm shadow-md"></div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="candle-flame"></div>
+                            <div class="w-3 h-12 bg-amber-400 rounded-t-sm shadow-md"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blow Button -->
+                <button id="blowBtn" onclick="blowCandles()" class="w-full max-w-xs gold-bg text-white font-bold py-3.5 rounded-xl hover:bg-[#b08e27] shadow-md transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-wind"></i> Blow & Make a Wish!
+                </button>
+            </div>
+        </div>
+
+        <!-- 🎁 STEP 8: THE SURPRISES & RIDDLES -->
+        <div id="step-7" class="w-full space-y-8 hidden">
+            <div class="text-center">
+                <span class="text-xs font-semibold uppercase tracking-widest gold-text">Step 8: Special Surprises</span>
+                <h3 class="font-serif-love text-2xl font-bold mt-1">Unlock Your Gifts!</h3>
+                <p class="text-sm text-stone-500">I got you some special surprises. Solves the riddles below to reveal them!</p>
+            </div>
+
+            <!-- RIDDLE 1: KARAOKE SET -->
+            <div class="bg-[#fcfbf7] border border-[#f0e8d3] p-6 rounded-2xl space-y-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-full bg-[#fbf6e9] border border-[#d4af37]/40 flex items-center justify-center gold-text font-bold">1</span>
+                    <h4 class="font-serif-love text-lg font-bold">Surprise Gift #1</h4>
+                </div>
+                <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-100">
+                    <p class="font-serif-love italic text-stone-700">"I have a mic but I'm not a broadcaster. I have speakers but I'm not a computer. I let you shine like a rockstar, even if you sing in the shower. What am I?"</p>
+                </div>
+                
+                <div class="space-y-3">
+                    <input type="text" id="riddle1Input" placeholder="Enter your guess..." class="w-full border border-stone-200 px-4 py-3 rounded-xl bg-white text-sm focus:ring-1 focus:ring-[#d4af37] focus:outline-none">
+                    <div class="flex gap-2">
+                        <button onclick="checkRiddle1()" class="flex-1 gold-bg text-white font-bold py-2.5 rounded-xl hover:bg-[#b08e27] text-sm transition-all">Submit Guess</button>
+                        <button onclick="revealGift1()" class="border border-stone-300 hover:bg-stone-50 px-4 rounded-xl text-xs text-stone-500 font-medium transition-all">Give Clue / Reveal</button>
+                    </div>
+                </div>
+
+                <!-- Gift Reveal Container -->
+                <div id="gift1-reveal" class="hidden p-4 bg-emerald-50 border border-emerald-100 rounded-xl space-y-3 text-center">
+                    <h5 class="font-serif-love text-emerald-800 font-bold">🎉 Correct! Your very own Karaoke Set! 🎤🎶</h5>
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd6a?auto=format&fit=crop&q=80&w=400" class="w-full max-h-40 object-cover rounded-lg shadow-md mx-auto" alt="Karaoke set style mic">
+                    <p class="text-xs text-stone-600">Get ready to belt out your favorite tunes with all your heart!</p>
+                </div>
+            </div>
+
+            <!-- RIDDLE 2: LAPTOP BAG -->
+            <div class="bg-[#fcfbf7] border border-[#f0e8d3] p-6 rounded-2xl space-y-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-full bg-[#fbf6e9] border border-[#d4af37]/40 flex items-center justify-center gold-text font-bold">2</span>
+                    <h4 class="font-serif-love text-lg font-bold">Surprise Gift #2</h4>
+                </div>
+                <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-100">
+                    <p class="font-serif-love italic text-stone-700">"I have arms but no hands, zippers but no teeth. I carry your digital window to the world safely wherever you roam. What am I?"</p>
+                </div>
+                
+                <div class="space-y-3">
+                    <input type="text" id="riddle2Input" placeholder="Enter your guess..." class="w-full border border-stone-200 px-4 py-3 rounded-xl bg-white text-sm focus:ring-1 focus:ring-[#d4af37] focus:outline-none">
+                    <div class="flex gap-2">
+                        <button onclick="checkRiddle2()" class="flex-1 gold-bg text-white font-bold py-2.5 rounded-xl hover:bg-[#b08e27] text-sm transition-all">Submit Guess</button>
+                        <button onclick="revealGift2()" class="border border-stone-300 hover:bg-stone-50 px-4 rounded-xl text-xs text-stone-500 font-medium transition-all">Give Clue / Reveal</button>
+                    </div>
+                </div>
+
+                <!-- Gift Reveal Container -->
+                <div id="gift2-reveal" class="hidden p-4 bg-emerald-50 border border-emerald-100 rounded-xl space-y-3 text-center">
+                    <h5 class="font-serif-love text-emerald-800 font-bold">🎉 Correct! A Premium Laptop Bag! 💻💼</h5>
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=400" class="w-full max-h-40 object-cover rounded-lg shadow-md mx-auto" alt="Stylish Minimalist Laptop Bag">
+                    <p class="text-xs text-stone-600">Designed to protect your digital window on all our upcoming journeys together!</p>
+                </div>
+            </div>
+
+            <!-- Progress Button to Final Card -->
+            <button id="finalStepBtn" onclick="goToFinal()" class="w-full max-w-xs mt-6 gold-bg text-white font-bold py-3.5 rounded-xl hover:bg-[#b08e27] shadow-md transition-all mx-auto hidden flex items-center justify-center gap-2">
+                Continue to Final Surprise 🌟
+            </button>
+        </div>
+
+        <!-- 💝 STEP 8 (FINAL): FINAL BIRTHDAY TOAST -->
+        <div id="step-final" class="w-full space-y-6 text-center hidden">
+            <div class="py-4">
+                <i class="fa-solid fa-cake-candles text-6xl gold-text animate-bounce mb-3"></i>
+                <h2 class="font-cursive text-5xl md:text-6xl gold-text mb-4">Happy Birthday Once Again, My Love!</h2>
+                
+                <div class="bg-[#fbf6e9] border border-[#e6d7b8]/40 p-6 rounded-2xl max-w-lg mx-auto space-y-4">
+                    <p class="font-serif-love italic text-lg text-stone-700">"May you get all the happiness, good health, and infinite success in the world. I love you, always and forever. ❤️"</p>
+                </div>
+            </div>
+
+            <button onclick="triggerConfettiLoop()" class="px-6 py-3 border border-[#d4af37] text-[#c5a059] hover:bg-[#fffdf2] font-semibold rounded-full transition-all text-sm mx-auto flex items-center gap-2 justify-center">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Double Tap For Sparkles!
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Heartwarming Footer tag -->
+    <div class="mt-8 text-center space-y-1 relative z-10">
+        <p class="text-xs text-stone-400 font-medium uppercase tracking-widest flex items-center justify-center gap-1">Made with all my love <i class="fa-solid fa-heart text-red-500"></i></p>
+    </div>
+
+    <!-- Web App Interaction Logic -->
+    <script>
+        // Set your specific wedding date: December 8, 2023 -> "2023-12-08"
+        const correctAnniversaryDate = "2023-12-08";
+
+        // Memory Carousel Photo URLs
+        const photos = [
+            {
+                url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=600",
+                caption: "Laughter looks so good on you."
+            },
+            {
+                url: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=600",
+                caption: "Another beautiful day spent holding hands."
+            },
+            {
+                url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&q=80&w=600",
+                caption: "Sharing endless adventures by your side is my dream."
+            }
+        ];
+        let photoIdx = 0;
+
+        // Music element configuration
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicIcon = document.getElementById('musicIcon');
+        let isMusicPlaying = false;
+
+        // Interactive Music Controls
+        musicToggle.addEventListener('click', () => {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicIcon.classList.remove('animate-spin');
+                musicIcon.classList.add('animate-bounce');
+                musicToggle.querySelector('span').innerText = 'Play Music 🎶';
+            } else {
+                bgMusic.play();
+                musicIcon.classList.remove('animate-bounce');
+                musicIcon.classList.add('animate-spin');
+                musicToggle.querySelector('span').innerText = 'Playing... 💖';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+
+        // Step 1: Wedding anniversary validation
+        function checkAnniversary() {
+            const dateVal = document.getElementById('anniversaryInput').value;
+            const errorLabel = document.getElementById('lockError');
+
+            if (dateVal === correctAnniversaryDate) {
+                errorLabel.classList.add('hidden');
+                // Explosion celebration effects
+                confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+                
+                setTimeout(() => {
+                    document.getElementById('step-1').classList.add('hidden');
+                    document.getElementById('step-2').classList.remove('hidden');
+                }, 1000);
+            } else {
+                errorLabel.classList.remove('hidden');
+            }
+        }
+
+        // Steps 2 & 3: Opening the Wax Seal Envelope
+        function openEnvelope() {
+            document.getElementById('envelope-sealed').classList.add('hidden');
+            document.getElementById('letter-open').classList.remove('hidden');
+            confetti({ particleCount: 50, angle: 60, spread: 55, origin: { x: 0 } });
+            confetti({ particleCount: 50, angle: 120, spread: 55, origin: { x: 1 } });
+        }
+
+        // Steps transition handlers
+        function goToStep4() {
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-4').classList.remove('remove');
+            document.getElementById('step-4').style.display = "block";
+        }
+
+        // Carousel controls
+        function updatePhoto() {
+            document.getElementById('carouselImage').src = photos[photoIdx].url;
+            document.getElementById('carouselCaption').innerText = photos[photoIdx].caption;
+        }
+        function prevPhoto() {
+            photoIdx = (photoIdx - 1 + photos.length) % photos.length;
+            updatePhoto();
+        }
+        function nextPhoto() {
+            photoIdx = (photoIdx + 1) % photos.length;
+            updatePhoto();
+        }
+
+        function goToStep5() {
+            document.getElementById('step-4').style.display = "none";
+            document.getElementById('step-5').classList.remove('hidden');
+        }
+
+        function goToStep6() {
+            document.getElementById('step-5').classList.add('hidden');
+            document.getElementById('step-6').classList.remove('hidden');
+        }
+
+        // Steps 6 & 7: Blowing Candles
+        function blowCandles() {
+            // Blow off the candles flames visually
+            const flames = document.querySelectorAll('.candle-flame');
+            flames.forEach(flame => {
+                flame.style.animation = 'none';
+                flame.style.opacity = '0';
+                flame.style.boxShadow = 'none';
+            });
+
+            // Trigger full-screen explosive confetti celebration
+            var duration = 4 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+              confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+              confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+
+              if (Date.now() < end) {
+                requestAnimationFrame(frame);
+              }
+            }());
+
+            document.getElementById('blowBtn').innerHTML = "🕯️ Wish Made! 🎉";
+            document.getElementById('blowBtn').disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('step-6').classList.add('hidden');
+                document.getElementById('step-7').classList.remove('hidden');
+            }, 3000);
+        }
+
+        // Surprise Riddle 1: Karaoke Set validation
+        function checkRiddle1() {
+            const guess = document.getElementById('riddle1Input').value.toLowerCase();
+            const reveals = ["karaoke", "mic", "sing", "microphone", "singer"];
+            
+            let isCorrect = false;
+            reveals.forEach(keyword => {
+                if(guess.includes(keyword)) isCorrect = true;
+            });
+
+            if(isCorrect) {
+                revealGift1();
+            } else {
+                alert("Hmm, close but not quite! Try again, or click 'Give Clue / Reveal'!");
+            }
+        }
+        function revealGift1() {
+            document.getElementById('gift1-reveal').classList.remove('hidden');
+            confetti({ particleCount: 30, spread: 40 });
+            checkBothRiddlesSolved();
+        }
+
+        // Surprise Riddle 2: Laptop Bag validation
+        function checkRiddle2() {
+            const guess = document.getElementById('riddle2Input').value.toLowerCase();
+            const reveals = ["bag", "backpack", "laptop sleeve", "case", "laptop bag", "sleeve"];
+            
+            let isCorrect = false;
+            reveals.forEach(keyword => {
+                if(guess.includes(keyword)) isCorrect = true;
+            });
+
+            if(isCorrect) {
+                revealGift2();
+            } else {
+                alert("Hmm, not quite right! Try thinking about where you carry your computer!");
+            }
+        }
+        function revealGift2() {
+            document.getElementById('gift2-reveal').classList.remove('hidden');
+            confetti({ particleCount: 30, spread: 40 });
+            checkBothRiddlesSolved();
+        }
+
+        function checkBothRiddlesSolved() {
+            const solved1 = !document.getElementById('gift1-reveal').classList.contains('hidden');
+            const solved2 = !document.getElementById('gift2-reveal').classList.contains('hidden');
+            if (solved1 && solved2) {
+                document.getElementById('finalStepBtn').classList.remove('hidden');
+            }
+        }
+
+        function goToFinal() {
+            document.getElementById('step-7').classList.add('hidden');
+            document.getElementById('step-final').classList.remove('hidden');
+            triggerConfettiLoop();
+        }
+
+        function triggerConfettiLoop() {
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+        }
+    </script>
+</body>
+</html>
