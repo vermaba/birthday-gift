@@ -26,29 +26,29 @@ if 'step' not in st.session_state:
     st.session_state.step = 1
 
 # --- STEP 1: ENTER WEDDING DATE ---
-if st.session_state.step >= 1:
+if st.session_state.step == 1:
     st.markdown("### 🔒 1. Enter Our Wedding Date")
     with st.container():
         st.markdown("<div class='box'>", unsafe_allow_html=True)
-        # Note: You can change the default date format or logic if needed!
-        wedding_date = st.date_input("When did we promise forever?", value=None, key="wedding_key")
         
-        # 💡 TIP: Change "2024-06-15" to your actual anniversary date!
-        if wedding_date:
-            if str(wedding_date) == "2024-06-15": 
+        wedding_date = st.date_input("When did we promise forever?", value=None, key="wedding_key")
+        submit_btn = st.button("Unlock 💛")
+        
+        if submit_btn and wedding_date:
+            # Your wedding date successfully updated here!
+            if str(wedding_date) == "2023-12-08": 
                 st.success("Correct! The envelope is unlocking... 🎉")
-                if st.session_state.step == 1:
-                    st.session_state.step = 2
-                    st.rerun()
+                time.sleep(1) 
+                st.session_state.step = 2
+                st.rerun()
             else:
                 st.error("Oops! Hmm... that's not quite right. Try our special day.")
         st.markdown("</div>", unsafe_allow_html=True)
 
 # --- STEP 2 & 3: OPEN THE ENVELOPE / A LETTER FOR YOU ---
 if st.session_state.step >= 2:
-    st.divider()
     st.markdown("### ✉️ 2 & 3. A Letter For You")
-    with st.expander("💌 Open the Envelope"):
+    with st.expander("💌 Open the Envelope", expanded=True):
         st.markdown("""
         <div class='box' style='font-family: "Georgia", serif; font-size: 16px; line-height: 1.6;'>
         <strong>My love,</strong><br><br>
@@ -59,16 +59,16 @@ if st.session_state.step >= 2:
         </div>
         """, unsafe_allow_html=True)
         
-        # Trigger next step smoothly
         if st.session_state.step == 2:
-            st.session_state.step = 3
+            if st.button("Continue to Memories ✨"):
+                st.session_state.step = 3
+                st.rerun()
 
 # --- STEP 4: OUR MEMORIES ---
 if st.session_state.step >= 3:
     st.divider()
     st.markdown("### 📸 4. Our Memories")
     
-    # Placeholder images. You can swap these out for public links of your actual photos later!
     images = [
         {"url": "https://picsum.photos/600/400?random=1", "caption": "One of my favorite memories"},
         {"url": "https://picsum.photos/600/400?random=2", "caption": "Another beautiful day together"},
@@ -87,9 +87,11 @@ if st.session_state.step >= 3:
     with col3:
         if st.button("▶", key="next"):
             st.session_state.img_idx = (st.session_state.img_idx + 1) % len(images)
-            if st.session_state.step == 3:
-                st.session_state.step = 4
-                st.rerun()
+
+    if st.session_state.step == 3:
+        if st.button("See Reasons I Love You 👇"):
+            st.session_state.step = 4
+            st.rerun()
 
 # --- STEP 5: 5 REASONS I LOVE YOU ---
 if st.session_state.step >= 4:
@@ -109,7 +111,9 @@ if st.session_state.step >= 4:
     st.markdown("</div>", unsafe_allow_html=True)
     
     if st.session_state.step == 4:
-        st.session_state.step = 5
+        if st.button("Time to Celebrate! 🎉"):
+            st.session_state.step = 5
+            st.rerun()
 
 # --- STEP 6 & 7: SPECIAL SURPRISE & BLOW CANDLES ---
 if st.session_state.step >= 5:
