@@ -87,12 +87,12 @@
     <!-- Floating Audio/Music Controller -->
     <div class="fixed top-5 right-5 z-50">
         <button id="musicToggle" class="bg-white/90 border border-[#E6D7B8] px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#fcf9f0] transition-all text-sm font-semibold text-[#c5a059]">
-            <i id="musicIcon" class="fa-solid fa-music animate-bounce"></i>
+            <i id="musicIcon" class="fa-solid fa-cake-candles animate-bounce"></i>
             <span>Play Happy Birthday Music</span>
         </button>
-        <!-- Standard royalty free romantic acoustic happy birthday piano cover -->
+        <!-- Public Domain Classic Happy Birthday Song -->
         <audio id="bgMusic" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            <source src="https://archive.org/download/HappyBirthdayToYou_201312/Happy%20Birthday%20To%20You.mp3" type="audio/mpeg">
         </audio>
     </div>
 
@@ -146,7 +146,7 @@
                 <!-- Open Letter View -->
                 <div id="letter-open" class="hidden bg-[#fbf6e9] border border-[#e6d7b8] p-6 md:p-8 rounded-2xl shadow-inner w-full text-stone-700 leading-relaxed space-y-4 text-center font-serif-love">
                     <p class="text-left"><strong>My dear,</strong></p>
-                    <p class="text-left italic">
+                    <p class="text-left italic text-stone-800 leading-relaxed">
                         Some feelings are too special to put into words, but I tried. 
                         This letter is a small reminder of how much you mean to me. 
                         You make my life brighter, safer, and infinitely more beautiful every single day.
@@ -169,22 +169,21 @@
 
             <!-- Interactive Carousel Frame -->
             <div class="relative bg-white border-8 border-white rounded-2xl shadow-xl overflow-hidden max-w-lg mx-auto">
-                <div class="aspect-[4/3] w-full bg-stone-100 flex items-center justify-center relative">
-                    <img id="carouselImage" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="Romantic couple portrait">
+                <div class="aspect-[3/4] w-full bg-stone-100 flex items-center justify-center relative">
+                    <!-- Real memories photos requested loaded with robust error fallbacks -->
+                    <img id="carouselImage" src="WhatsApp Image 2026-07-18 at 1.53.10 PM.jpeg" class="w-full h-full object-cover" alt="Our Special Memory" onerror="this.src='https://placehold.co/600x800/fcfbf7/d4af37?text=Our+Adventure'">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    <p id="carouselCaption" class="absolute bottom-4 left-4 right-4 text-white font-serif-love italic text-center md:text-lg">One of my absolute favorite moments with you.</p>
+                    <p id="carouselCaption" class="absolute bottom-4 left-4 right-4 text-white font-serif-love italic text-center md:text-lg">Scaling new heights together. Every moment by your side is an adventure.</p>
                 </div>
 
                 <!-- Navigation arrows -->
-                <button onclick="prevPhoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md">
+                <button onclick="prevPhoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md z-15">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
-                <button onclick="nextPhoto()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md">
+                <button onclick="nextPhoto()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-stone-700 hover:bg-white transition-all shadow-md z-15">
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
-            
-            <p class="text-xs text-center text-stone-400">💡 Tip: You can swap these generic couples pictures for your real photos easily inside your index.html file!</p>
 
             <button onclick="goToStep5()" class="w-full max-w-xs mt-6 gold-bg text-white font-bold py-3 rounded-xl hover:bg-[#b08e27] shadow-md transition-all mx-auto block">
                 5 Reasons I Love You 💖
@@ -201,23 +200,23 @@
             <!-- Reasons list box -->
             <div class="space-y-3 max-w-lg mx-auto">
                 <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
-                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">1</span>
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm shrink-0">1</span>
                     <p class="text-stone-700 font-medium text-sm md:text-base">You always got my back.</p>
                 </div>
                 <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
-                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">2</span>
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm shrink-0">2</span>
                     <p class="text-stone-700 font-medium text-sm md:text-base">You always keep your inner child alive.</p>
                 </div>
                 <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
-                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">3</span>
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm shrink-0">3</span>
                     <p class="text-stone-700 font-medium text-sm md:text-base">You also now love beaches (my absolute favorite!).</p>
                 </div>
                 <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
-                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">4</span>
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm shrink-0">4</span>
                     <p class="text-stone-700 font-medium text-sm md:text-base">You care for me no matter which phase we are in.</p>
                 </div>
                 <div class="p-4 bg-[#fbf6e9] border border-[#e6d7b8]/40 rounded-xl flex items-center gap-4 hover:shadow-md transition-all">
-                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm">5</span>
+                    <span class="w-8 h-8 rounded-full gold-bg text-white flex items-center justify-center font-bold text-sm shrink-0">5</span>
                     <p class="text-stone-700 font-medium text-sm md:text-base">You handle every tough situation so calmly.</p>
                 </div>
             </div>
@@ -240,7 +239,7 @@
                 <div class="relative w-64 h-64 bg-[#fcfbf7] border border-[#f0e8d3] rounded-full shadow-inner flex flex-col items-center justify-center">
                     
                     <!-- Birthday Cake Image -->
-                    <img id="cakeImage" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=400" class="w-36 h-36 object-cover rounded-full border-4 border-white shadow-lg z-10" alt="Lit Birthday Cake">
+                    <img id="cakeImage" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=400" class="w-36 h-36 object-cover rounded-full border-4 border-white shadow-lg z-10" alt="Lit Birthday Cake" onerror="this.src='https://placehold.co/400x400/fffdfa/c5a059?text=Happy+Birthday'">
                     
                     <!-- Custom Candle flames overlay -->
                     <div id="candlesContainer" class="absolute -top-4 flex justify-center gap-6 z-20">
@@ -271,7 +270,7 @@
             <div class="text-center">
                 <span class="text-xs font-semibold uppercase tracking-widest gold-text">Step 8: Special Surprises</span>
                 <h3 class="font-serif-love text-2xl font-bold mt-1">Unlock Your Gifts!</h3>
-                <p class="text-sm text-stone-500">I got you some special surprises. Solves the riddles below to reveal them!</p>
+                <p class="text-sm text-stone-500">I got you some special surprises. Solve the riddles below to reveal them!</p>
             </div>
 
             <!-- RIDDLE 1: KARAOKE SET -->
@@ -295,12 +294,12 @@
                 <!-- Gift Reveal Container -->
                 <div id="gift1-reveal" class="hidden p-4 bg-emerald-50 border border-emerald-100 rounded-xl space-y-3 text-center">
                     <h5 class="font-serif-love text-emerald-800 font-bold">🎉 Correct! Your very own Karaoke Set! 🎤🎶</h5>
-                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd6a?auto=format&fit=crop&q=80&w=400" class="w-full max-h-40 object-cover rounded-lg shadow-md mx-auto" alt="Karaoke set style mic">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd6a?auto=format&fit=crop&q=80&w=400" class="w-full max-h-40 object-cover rounded-lg shadow-md mx-auto" alt="Karaoke set style mic" onerror="this.src='https://placehold.co/400x200/e6f4ea/137333?text=Karaoke+Set'">
                     <p class="text-xs text-stone-600">Get ready to belt out your favorite tunes with all your heart!</p>
                 </div>
             </div>
 
-            <!-- RIDDLE 2: LAPTOP BAG -->
+            <!-- RIDDLE 2: LAPTOP BAG (Photo Removed) -->
             <div class="bg-[#fcfbf7] border border-[#f0e8d3] p-6 rounded-2xl space-y-4">
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-8 rounded-full bg-[#fbf6e9] border border-[#d4af37]/40 flex items-center justify-center gold-text font-bold">2</span>
@@ -318,10 +317,12 @@
                     </div>
                 </div>
 
-                <!-- Gift Reveal Container -->
-                <div id="gift2-reveal" class="hidden p-4 bg-emerald-50 border border-emerald-100 rounded-xl space-y-3 text-center">
+                <!-- Gift Reveal Container (Updated: Laptop bag photo removed as requested, replaced with beautiful graphic setup) -->
+                <div id="gift2-reveal" class="hidden p-6 bg-emerald-50 border border-emerald-100 rounded-xl space-y-3 text-center">
                     <h5 class="font-serif-love text-emerald-800 font-bold">🎉 Correct! A Premium Laptop Bag! 💻💼</h5>
-                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=400" class="w-full max-h-40 object-cover rounded-lg shadow-md mx-auto" alt="Stylish Minimalist Laptop Bag">
+                    <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-3xl text-emerald-600 my-4 shadow-sm">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
                     <p class="text-xs text-stone-600">Designed to protect your digital window on all our upcoming journeys together!</p>
                 </div>
             </div>
@@ -338,12 +339,14 @@
                 <i class="fa-solid fa-cake-candles text-6xl gold-text animate-bounce mb-3"></i>
                 <h2 class="font-cursive text-5xl md:text-6xl gold-text mb-4">Happy Birthday Once Again, My Love!</h2>
                 
-                <div class="bg-[#fbf6e9] border border-[#e6d7b8]/40 p-6 rounded-2xl max-w-lg mx-auto space-y-4">
-                    <p class="font-serif-love italic text-lg text-stone-700">"May you get all the happiness, good health, and infinite success in the world. I love you, always and forever. ❤️"</p>
+                <div class="bg-[#fbf6e9] border border-[#e6d7b8]/40 p-6 rounded-2xl max-w-lg mx-auto space-y-4 shadow-sm">
+                    <p class="font-serif-love italic text-lg text-stone-700 leading-relaxed">
+                        "May you get all the happiness, good health, and infinite success in the world. I love you, always and forever. ❤️"
+                    </p>
                 </div>
             </div>
 
-            <button onclick="triggerConfettiLoop()" class="px-6 py-3 border border-[#d4af37] text-[#c5a059] hover:bg-[#fffdf2] font-semibold rounded-full transition-all text-sm mx-auto flex items-center gap-2 justify-center">
+            <button onclick="triggerConfettiLoop()" class="px-6 py-3 border border-[#d4af37] text-[#c5a059] hover:bg-[#fffdf2] font-semibold rounded-full transition-all text-sm mx-auto flex items-center gap-2 justify-center shadow-sm">
                 <i class="fa-solid fa-wand-magic-sparkles"></i> Double Tap For Sparkles!
             </button>
         </div>
@@ -360,22 +363,41 @@
         // Set your specific wedding date: December 8, 2023 -> "2023-12-08"
         const correctAnniversaryDate = "2023-12-08";
 
-        // Memory Carousel Photo URLs
+        // Memory Carousel real photo list (Updated with user photos)
         const photos = [
             {
-                url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=600",
-                caption: "Laughter looks so good on you."
+                url: "WhatsApp Image 2026-07-18 at 1.53.10 PM.jpeg",
+                caption: "Scaling new heights together. Every moment by your side is an adventure."
             },
             {
-                url: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=600",
-                caption: "Another beautiful day spent holding hands."
+                url: "WhatsApp Image 2026-07-18 at 1.53.56 PM.jpeg",
+                caption: "Sailing through life with you is my absolute favorite dream."
             },
             {
-                url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&q=80&w=600",
-                caption: "Sharing endless adventures by your side is my dream."
+                url: "WhatsApp Image 2026-07-18 at 1.55.10 PM.jpeg",
+                caption: "Your smile makes even the chilliest days feel so warm and cozy."
             }
         ];
         let photoIdx = 0;
+
+        // Custom modal setup since standard alert() is forbidden
+        function displayToast(msg, isSuccess = false) {
+            const container = document.createElement('div');
+            container.className = `fixed bottom-8 left-1/2 -translate-x-1/2 px-6 py-3.5 rounded-xl shadow-2xl z-50 text-sm font-semibold transition-all duration-300 transform translate-y-4 opacity-0 flex items-center gap-2 ${isSuccess ? 'bg-emerald-600 text-white' : 'bg-stone-900 text-amber-100'}`;
+            container.innerHTML = `<i class="${isSuccess ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-exclamation'}"></i> <span>${msg}</span>`;
+            document.body.appendChild(container);
+            
+            // Animate in
+            setTimeout(() => {
+                container.classList.remove('translate-y-4', 'opacity-0');
+            }, 50);
+
+            // Out & Cleanup
+            setTimeout(() => {
+                container.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => container.remove(), 300);
+            }, 4000);
+        }
 
         // Music element configuration
         const bgMusic = document.getElementById('bgMusic');
@@ -387,14 +409,15 @@
         musicToggle.addEventListener('click', () => {
             if (isMusicPlaying) {
                 bgMusic.pause();
-                musicIcon.classList.remove('animate-spin');
-                musicIcon.classList.add('animate-bounce');
-                musicToggle.querySelector('span').innerText = 'Play Music 🎶';
+                musicIcon.className = "fa-solid fa-cake-candles animate-bounce";
+                musicToggle.querySelector('span').innerText = 'Play Happy Birthday Music 🎶';
             } else {
-                bgMusic.play();
-                musicIcon.classList.remove('animate-bounce');
-                musicIcon.classList.add('animate-spin');
-                musicToggle.querySelector('span').innerText = 'Playing... 💖';
+                bgMusic.play().then(() => {
+                    musicIcon.className = "fa-solid fa-compact-disc animate-spin text-red-500";
+                    musicToggle.querySelector('span').innerText = 'Playing Birthday Melody... 💖';
+                }).catch(err => {
+                    displayToast("Please interact with the screen first to play music!");
+                });
             }
             isMusicPlaying = !isMusicPlaying;
         });
@@ -429,14 +452,16 @@
         // Steps transition handlers
         function goToStep4() {
             document.getElementById('step-2').classList.add('hidden');
-            document.getElementById('step-4').classList.remove('remove');
-            document.getElementById('step-4').style.display = "block";
+            document.getElementById('step-4').classList.remove('hidden');
+            updatePhoto(); // Ensure image loads
         }
 
         // Carousel controls
         function updatePhoto() {
-            document.getElementById('carouselImage').src = photos[photoIdx].url;
-            document.getElementById('carouselCaption').innerText = photos[photoIdx].caption;
+            const imgEl = document.getElementById('carouselImage');
+            const capEl = document.getElementById('carouselCaption');
+            if (imgEl) imgEl.src = photos[photoIdx].url;
+            if (capEl) capEl.innerText = photos[photoIdx].caption;
         }
         function prevPhoto() {
             photoIdx = (photoIdx - 1 + photos.length) % photos.length;
@@ -448,10 +473,11 @@
         }
 
         function goToStep5() {
-            document.getElementById('step-4').style.display = "none";
+            document.getElementById('step-4').classList.add('hidden');
             document.getElementById('step-5').classList.remove('hidden');
         }
 
+        // Transition from reasons list to cake blow section
         function goToStep6() {
             document.getElementById('step-5').classList.add('hidden');
             document.getElementById('step-6').classList.remove('hidden');
@@ -492,7 +518,7 @@
         // Surprise Riddle 1: Karaoke Set validation
         function checkRiddle1() {
             const guess = document.getElementById('riddle1Input').value.toLowerCase();
-            const reveals = ["karaoke", "mic", "sing", "microphone", "singer"];
+            const reveals = ["karaoke", "mic", "sing", "microphone", "singer", "karoke", "carioke"];
             
             let isCorrect = false;
             reveals.forEach(keyword => {
@@ -502,7 +528,7 @@
             if(isCorrect) {
                 revealGift1();
             } else {
-                alert("Hmm, close but not quite! Try again, or click 'Give Clue / Reveal'!");
+                displayToast("Hmm, close but not quite! Try again, or click 'Give Clue / Reveal'!");
             }
         }
         function revealGift1() {
@@ -524,7 +550,7 @@
             if(isCorrect) {
                 revealGift2();
             } else {
-                alert("Hmm, not quite right! Try thinking about where you carry your computer!");
+                displayToast("Hmm, not quite right! Try thinking about where you carry your computer!");
             }
         }
         function revealGift2() {
